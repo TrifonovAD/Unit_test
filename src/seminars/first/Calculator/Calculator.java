@@ -34,17 +34,21 @@ public class Calculator {
         //  Отрицательные числа
         //  Дробные значения корней
         //  Целые
-            if(num < 0) {
-                throw new IllegalArgumentException("Cannot calculate square root of a negative number");
-            }
-            return Math.sqrt(num);
+        if (num < 0) {
+            throw new IllegalArgumentException("Cannot calculate square root of a negative number");
+        }
+        return Math.sqrt(num);
     }
 
     // Нужно написать в калькуляторе метод вычисления суммы покупки со скидкой и проверить его, используя AssertJ
     // Примерная сигнатура и тело метода:
-    public static double calculatingDiscount(double purchaseAmount, int discountAmount) {
+    public static double calculateDiscount(double purchaseAmount, int discountAmount) {
         // purchaseAmount - сумма покупки
         // discountAmount - размер скидки
-        return 0; // Метод должен возвращать сумму покупки со скидкой
+        if (purchaseAmount <= 0)
+            throw new RuntimeException("Сумма покупки до применения скидки не может быть меньше или равной нулю.");
+        if (discountAmount < 0 || discountAmount > 100)
+            throw new RuntimeException("Размер скидки должен быть в диапазоне [0,100]");
+        return purchaseAmount - (purchaseAmount * discountAmount / 100); // Метод возвращает сумму покупки со скидкой
     }
 }

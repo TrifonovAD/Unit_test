@@ -73,5 +73,19 @@ public class CalculatorTest {
         // }
         //   assert 0 == seminars.first.Calculator.Calculator.calculation(2, 6, '+');
         //    assertThat(seminars.first.Calculator.Calculator.calculation(2, 6, '+')).isEqualTo(0);
+
+        // проверка на нормальных данных
+        assertThat(Calculator.calculateDiscount(100, 100)).isEqualTo(0.0);
+        assertThat(Calculator.calculateDiscount(100, 50)).isEqualTo(50.0);
+        assertThat(Calculator.calculateDiscount(100, 0)).isEqualTo(100.0);
+
+        //Проверка при отрицательной начальной цене
+        assertThatThrownBy(() -> Calculator.calculateDiscount(-1, 10)).isInstanceOf(RuntimeException.class);
+        // Проверка при нулевой начальной цене
+        assertThatThrownBy(() -> Calculator.calculateDiscount(0, 10)).isInstanceOf(RuntimeException.class);
+        // Проверка, если скидка отрицательная
+        assertThatThrownBy(() -> Calculator.calculateDiscount(100, -10)).isInstanceOf(RuntimeException.class);
+        // Проверка если скидка более 100%
+        assertThatThrownBy(() -> Calculator.calculateDiscount(100, 101)).isInstanceOf(RuntimeException.class);
     }
 }
